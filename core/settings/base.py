@@ -183,7 +183,7 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 
 
 
-AUTH_USER_MODEL = 'users.User'
+
 
 from datetime import timedelta
 
