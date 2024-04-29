@@ -12,7 +12,7 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-class Claim(BaseModel):
+class Petittion(BaseModel):
     phone_number = models.CharField(max_length=13,
                                     validators =[phone_validator],
                                     verbose_name='Phone number'
@@ -46,7 +46,7 @@ class Claim(BaseModel):
         return f"{self.id}-{self.first_name}-{self.last_name}"
     
 class Confirmation(BaseModel):
-    claim = models.ForeignKey(Claim,
+    claim = models.ForeignKey(Petittion,
                               related_name='confirmations',
                               verbose_name='Confirmation',
                               on_delete=models.PROTECT
@@ -64,7 +64,7 @@ class Confirmation(BaseModel):
         return f"{self.id}-{self.claim.first_name}-{self.claim.last_name}-{self.amount}"
     
 class Sponsor(BaseModel):
-    claim = models.ForeignKey(Claim,
+    claim = models.ForeignKey(Petittion,
                               related_name='sponsors',
                               verbose_name='Sponsor',
                               on_delete=models.PROTECT,
