@@ -6,9 +6,10 @@ from rest_framework_simplejwt.tokens import RefreshToken
 import datetime
 from django.utils import timezone
 import random
+from apps.common.models import BaseModel
 
 TIME = 1
-
+USER, ADMIN , DONATER = 'user', 'admin', 'donater'
 from django.core import validators
 from django.utils.deconstruct import deconstructible
 
@@ -73,9 +74,13 @@ class User(AbstractUser):
     username = None
 
     phone_validator = PhoneValidator()
-
+    TYPE = (
+        (ADMIN, "Admin"),
+        (USER, "User"),
+        (DONATER, "Donater")
+    )
     auth_status = models.BooleanField(default=False)
-
+    type = models.CharField(max_length=100, choices=TYPE, default=DONATER)
     phone_number = models.CharField(
         max_length = 13,
         verbose_name='Phone number',
@@ -108,3 +113,14 @@ class User(AbstractUser):
         return code
 
         
+
+class NeedHelp(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    description = models.TextField()
+    dead_line = models.DateTimeField()
+    amount_money = models.DecimalField(max_digits=20, decimal_places=2)
+    file = models.FileField(upload_to='file/', null=True, blank=True)
+    locations = models.CharField(max_length=255, null=True, blank=True)
+
+    def __str__(self) -> str:
+        return self.user.phone_number

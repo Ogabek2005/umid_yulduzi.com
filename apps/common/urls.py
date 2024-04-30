@@ -9,4 +9,5 @@ urlpatterns = [
     path('sign-up', SignupView.as_view()),
     path('verify/', VerifyView.as_view()),
     path('login/', SignInView.as_view()),
+    path('needs_help', NeedHelpView.as_view())
 ]

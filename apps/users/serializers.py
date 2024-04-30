@@ -79,3 +79,11 @@ class VerifySerializer(serializers.Serializer):
         user.save()
         return attrs
         
+
+
+class NeedHelpSerializer(serializers.ModelSerializer):
+    first_name = serializers.CharField(source='user.first_name')
+    last_name = serializers.CharField(source='user.last_name')
+    class Meta:
+        model = models.NeedHelp
+        fields = ['first_name', 'last_name', 'amount_money', 'description', 'dead_line','file', 'locations']
