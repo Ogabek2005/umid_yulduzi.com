@@ -56,7 +56,7 @@ class UserConfirmation(models.Model):
         related_name='confirmation',
     )
     code = models.CharField(max_length=4)
-    expire_datetime = models.DateTimeField()
+    expire_datetime = models.DateTimeField(auto_now=True)
 
     def save(self, *args, **kwargs):
         # if self.code:

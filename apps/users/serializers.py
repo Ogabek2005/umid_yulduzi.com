@@ -20,11 +20,9 @@ class SignUpSerializer(serializers.Serializer):
         phone = validated_data.get('phone_number')
         password = validated_data.get('password')
         user = models.User.objects.filter(phone_number=phone).first()
-
         if user:
-            if user.auth_status:
-                raise serializers.ValidationError({'msg': 'This phone number is already in use'})
-        else:   
+            raise serializers.ValidationError({'msg': 'This phone number is already in use'})
+        else:
             user = models.User.objects.create_user(phone_number=phone, password=password)
 
 
@@ -32,10 +30,10 @@ class SignUpSerializer(serializers.Serializer):
         
         return user
 
-    def to_representation(self, instance):
-        data = super().to_representation(instance)
-        data['tokens'] = instance.tokens()
-        return data
+    # def to_representation(self, instance):
+    #     data = super().to_representation(instance)
+    #     data['tokens'] = instance.tokens()
+    #     return data
 
 class LoginSerializer(serializers.Serializer):
     phone_number = serializers.CharField(
@@ -53,7 +51,7 @@ class LoginSerializer(serializers.Serializer):
 
         if not user.check_password(password):
             raise serializers.ValidationError({"msg": "Password does not match"})
-        
+        user.auth_status = False
         self.instance = user
         return attrs
 
