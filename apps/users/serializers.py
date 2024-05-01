@@ -30,10 +30,10 @@ class SignUpSerializer(serializers.Serializer):
         
         return user
 
-    # def to_representation(self, instance):
-    #     data = super().to_representation(instance)
-    #     data['tokens'] = instance.tokens()
-    #     return data
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['tokens'] = instance.tokens()
+        return data
 
 class LoginSerializer(serializers.Serializer):
     phone_number = serializers.CharField(
@@ -87,3 +87,10 @@ class NeedHelpSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.NeedHelp
         fields = ['first_name', 'last_name', 'amount_money', 'description', 'dead_line','file', 'locations']
+
+
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.User
+        fields = ['first_name', 'last_name', 'phone_number']
+    
