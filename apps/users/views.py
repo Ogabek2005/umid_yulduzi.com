@@ -51,16 +51,8 @@ class NeedHelpView(generics.ListAPIView):
 
 
 
-class ProfileView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = User.objects.all()
+class ProfileView(generics.RetrieveAPIView):
+    queryset = NeedHelp.objects.all()
     serializer_class = serializers.ProfileSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [JWTAuthentication]
-
-    def get(self, request,pk, *args, **kwargs):
-        from rest_framework import serializers
-        if request.user.type == 'admin':
-            return super().get(request, *args, **kwargs)
-        elif request.user.id != pk:
-            raise serializers.ValidationError({"msg": "Bu yerga kirishing uchun admin yoki shu user bolishing kerak"})
-        return super().get(request, *args, **kwargs)
+    permission_classes = [AllowAny]
+    # authentication_classes = [JWTAuthentication]
