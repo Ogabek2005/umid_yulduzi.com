@@ -122,7 +122,7 @@ class NeedHelp(BaseModel):
     amount_money = models.DecimalField(max_digits=20, decimal_places=2)
     file = models.FileField(upload_to='file/', null=True, blank=True)
     locations = models.CharField(max_length=255, null=True, blank=True)
-    card = models.DecimalField(max_digits=16, decimal_places=2)
+    card = models.CharField(max_length=16)
 
     def __str__(self) -> str:
         return self.user.phone_number
