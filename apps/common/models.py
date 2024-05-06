@@ -24,17 +24,6 @@ class Petittion(BaseModel):
                                  verbose_name='Last Name'
                                 )
     description = models.TextField()
-    card_number = models.CharField(max_length=16,
-                                   validators = [card_validator],
-                                   verbose_name='Card number')
-    passport_series = models.CharField(max_length=2,
-                                       validators = [passport_validator],
-                                       verbose_name='Passport series'
-                                       )
-    passport_number = models.CharField(max_length=7,
-                                      validators = [card_validator],
-                                      verbose_name='Passport number'
-                                      )
     location = models.CharField(max_length=255,
                                 verbose_name='Location',
                                 blank=True,

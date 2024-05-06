@@ -112,7 +112,8 @@ class User(AbstractUser):
             UserConfirmation.objects.create(user=self, code=code)
         return code
 
-        
+
+
 
 class NeedHelp(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -121,6 +122,7 @@ class NeedHelp(BaseModel):
     amount_money = models.DecimalField(max_digits=20, decimal_places=2)
     file = models.FileField(upload_to='file/', null=True, blank=True)
     locations = models.CharField(max_length=255, null=True, blank=True)
+    card = models.DecimalField(max_digits=16, decimal_places=2)
 
     def __str__(self) -> str:
         return self.user.phone_number
