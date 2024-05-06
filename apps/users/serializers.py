@@ -86,7 +86,7 @@ class NeedHelpSerializer(serializers.ModelSerializer):
     last_name = serializers.CharField(source='user.last_name')
     class Meta:
         model = models.NeedHelp
-        fields = ['id','first_name', 'last_name', 'amount_money', 'description', 'dead_line','file', 'locations']
+        fields = ['id','first_name', 'last_name', 'amount_money', 'description', 'dead_line','file', 'locations', 'card']
 
 
 class ProfileSerializer(serializers.ModelSerializer):
