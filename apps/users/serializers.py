@@ -84,9 +84,10 @@ class VerifySerializer(serializers.Serializer):
 class NeedHelpSerializer(serializers.ModelSerializer):
     first_name = serializers.CharField(source='user.first_name')
     last_name = serializers.CharField(source='user.last_name')
+    collected_amount = serializers.DecimalField(max_digits=15, decimal_places=2, default=0)
     class Meta:
         model = models.NeedHelp
-        fields = ['id','first_name', 'last_name', 'amount_money', 'description', 'dead_line','file', 'locations', 'card']
+        fields = ['id','first_name', 'last_name', 'amount_money', 'description', 'dead_line','file', 'locations', 'card', 'collected_amount']
 
 
 class ProfileSerializer(serializers.ModelSerializer):
